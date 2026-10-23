@@ -6,7 +6,7 @@
 /*   By: reiascan <reiascan@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 19:29:36 by reiascan          #+#    #+#             */
-/*   Updated: 2026/10/23 19:27:35 by reiascan         ###   ########.fr       */
+/*   Updated: 2026/10/23 22:26:00 by reiascan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 int	main(void)
 {
-	int	count;
-	int number;
+	int		count;
+	int 	number;
 	char	*str;
 
 	str = "hELICOPtero33";
-
 	number = 15;
+	count = ft_printf(NULL);
+	ft_printf("Valor cuando fmt es NULL: %d\n", count);
+	ft_printf("\n");
 	// IMPRIMIR STR (%s)
 	ft_printf(" ******  TEST STR (%%s) ****** \n");
 	ft_printf(" ------  MI PRINTF  ------ \n");
