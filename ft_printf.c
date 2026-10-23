@@ -6,7 +6,7 @@
 /*   By: reiascan <reiascan@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 19:43:40 by reiascan          #+#    #+#             */
-/*   Updated: 2026/10/22 22:43:21 by reiascan         ###   ########.fr       */
+/*   Updated: 2026/10/23 18:05:31 by reiascan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_printf(char const *fmt, ...)
 	int		count;
 	va_list	ap;
 
+	if (fmt == NULL)
+		return (-1);
 	va_start(ap, fmt);
 	count = 0;
 	while (*fmt != 0)

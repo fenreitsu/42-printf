@@ -6,8 +6,9 @@ NAME = libftprintf.a
 SRC = print_digit.c \
 	print_str.c \
 	print_char.c \
+	print_mem_dir.c \
 	print_evaluator.c \
-	ft_printf.c
+	ft_printf.c \
 
 OBJS = $(SRC:.c=.o)
 
