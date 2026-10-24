@@ -26,7 +26,7 @@ El  objetivo de este proyecto es replicar el comportamiento de printf, bajo los 
 | `%X` | `unsigned int` | Imprime un entero en hexadecimal (mayúsculas). |
 | `%%` | — | Imprime el carácter `%`. |
 
-Este proyecto cubre únicamente la **parte obligatoria** del subject: no implementa los flags de bonus (ancho, precisión, justificación, relleno, etc.).
+Este proyecto cubre únicamente la **parte obligatoria** del subject: no implementa los flags de bonus.
 
 ---
 
@@ -111,17 +111,17 @@ Para usar `libftprintf.a`:
 2. Compila enlazando la librería:
 
    ~~~bash
-   cc -Wall -Wextra -Werror main.c libftprintf.a -o programa
+   cc -Wall -Wextra -Werror main.c libftprintf.a
    ~~~
 
-   - `-Wall` activa todos los warnings importantes.
+   - `-Wall` para activar los warnings importantes.
    - `-Wextra` activa warnings adicionales.
    - `-Werror` convierte los warnings en errores.
 
    También puedes enlazarla por nombre, indicando al enlazador dónde buscar:
 
    ~~~bash
-   cc -Wall -Wextra -Werror main.c -L. -lftprintf -o programa
+   cc -Wall -Wextra -Werror main.c -L. -lftprintf
    ~~~
 
    - `-L.` indica al enlazador que busque librerías en el directorio actual.
@@ -169,16 +169,17 @@ hex: ff | HEX: FF | ptr: 0x... | %
 
 ### Referencias y documentación
 
-* **PDF del subject de 42** – Contiene las reglas específicas del proyecto, los prototipos exactos, los requisitos de normativa y los criterios de evaluación. Es la fuente principal de la que se extrae todo lo que se solicita
-* **https://pythontutor.com/c.html** – Herramienta de visualización paso a paso de código C. Se utilizó para identificar fallos, entender el flujo de ejecución y depurar el manejo de punteros y la recursión.
-* **https://www.w3schools.com/** – Utilizado para repasar conceptos básicos de C, como sintaxis, tipos de datos, operadores y estructuras de control.
-* **El man (manual) de Linux** – Consulta de comandos del sistema y de los prototipos y comportamientos de las funciones estándar de `libc` (por ejemplo, `man write`, `man printf`).
+* **PDF del subject de 42** – Contiene las reglas específicas del proyecto, los prototipos exactos, los requisitos de normativa y los criterios de evaluación.
+* **https://es.cppreference.com/c/variadic** – Utilizado para repasar conceptos de funciones t argumentos variadicos, me ayudo muhco a comprender a visualizar lo que se me pedia para este proyecto
+* **https://es.cppreference.com/c/io/fprintf** – Utilizado para repasar la funcion printf e intentar mimetizarla en todo lo que se me pedia de la manera mas fidedigna.
+* **El man (manual) de Linux** – Consulta de comandos del sistema y de los prototipos y comportamientos de las funciones estándar de `libc` (por ejemplo, `man write`, `man printf`), y además tambien consultar el man de `va_start`, `va_arg`, `va_list`, `va_end`.
 
 ### Herramientas de prueba
 
 * **Tests propios** – Mis tests, aunque sencillos, fueron los que me ayudaron a plantearme la mayoría de problemas y/o a como abordar mis funciones.
+* **https://pythontutor.com/c.html** – Herramienta de visualización paso a paso de código C. Se utilizó para identificar fallos, entender el flujo de ejecución y depurar el manejo de punteros y la recursión.
 * **[francinette-image](https://github.com/WaRtr0/francinette-image)** –  Se ha utilizado esta herramienta de la comunidad de 42 para testear mi proyecto
 
 ### Sobre el uso de IA
 
-* **Tareas:** La IA se utilizó para crear, formatear y estructurar este archivo `README.md` de acuerdo con los requisitos indicados en el subject de este proyecto de 42.
+* La IA se utilizó para crear, formatear y estructurar este archivo `README.md` de acuerdo con los requisitos indicados en el subject de este proyecto de 42.
