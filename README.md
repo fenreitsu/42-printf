@@ -1,135 +1,135 @@
-*Este proyecto ha sido creado como parte del currículo de 42 por [reiascan]*
+*This project was created as part of the 42 curriculum by [reiascan]*
 
 # ft_printf
 
-## Descripción
+## Description
 
-`ft_printf` es un proyecto individual del currículo de 42 cuyo objetivo es recrear el comportamiento de la función `printf` de la librería estándar de C. La función debe interpretar una cadena de formato, consumir los argumentos variables correspondientes mediante `va_list` y escribir el resultado en la salida estándar, devolviendo el número total de caracteres impresos.
+`ft_printf` is an individual project from the 42 curriculum whose goal is to recreate the behavior of the `printf` function from the C standard library. The function must interpret a format string, consume the corresponding variadic arguments through `va_list`, and write the result to standard output, returning the total number of characters printed.
 
-Implementar `ft_printf` me ayudó a comprender en profundidad el manejo de funciones variádicas (`stdarg.h`) y la recursión aplicada a la conversión de números en distintas bases.
+Implementing `ft_printf` helped me gain an in-depth understanding of variadic functions (`stdarg.h`) and recursion applied to number conversion in different bases.
 
 ---
 
-## Conversiones soportadas
+## Supported conversions
 
-El  objetivo de este proyecto es replicar el comportamiento de printf, bajo los esppecificadores que se nos han planteado desde  la escuela de 42. No se incluyen los demas especificadores de la funcion `printf`original, solo los de la lista siguiente. 
+The goal of this project is to replicate the behavior of printf under the specifiers proposed to us by the 42 school. The other specifiers of the original `printf` function are not included, only those in the following list.
 
-| Especificador | Argumento | Descripción |
+| Specifier | Argument | Description |
 | :---: | :--- | :--- |
-| `%c` | `int` | Imprime un único carácter. |
-| `%s` | `char *` | Imprime una cadena; si es `NULL`, imprime `(null)`. |
-| `%p` | `void *` | Imprime la dirección en hexadecimal con prefijo `0x`; si es `NULL`, imprime `(nil)`. |
-| `%d` | `int` | Imprime un entero decimal con signo. |
-| `%i` | `int` | Imprime un entero decimal con signo. |
-| `%u` | `unsigned int` | Imprime un entero decimal sin signo. |
-| `%x` | `unsigned int` | Imprime un entero en hexadecimal (minúsculas). |
-| `%X` | `unsigned int` | Imprime un entero en hexadecimal (mayúsculas). |
-| `%%` | — | Imprime el carácter `%`. |
+| `%c` | `int` | Prints a single character. |
+| `%s` | `char *` | Prints a string; if it is `NULL`, prints `(null)`. |
+| `%p` | `void *` | Prints the address in hexadecimal with the `0x` prefix; if it is `NULL`, prints `(nil)`. |
+| `%d` | `int` | Prints a signed decimal integer. |
+| `%i` | `int` | Prints a signed decimal integer. |
+| `%u` | `unsigned int` | Prints an unsigned decimal integer. |
+| `%x` | `unsigned int` | Prints an integer in hexadecimal (lowercase). |
+| `%X` | `unsigned int` | Prints an integer in hexadecimal (uppercase). |
+| `%%` | — | Prints the `%` character. |
 
-Este proyecto cubre únicamente la **parte obligatoria** del subject: no implementa los flags de bonus.
+This project covers only the **mandatory part** of the subject: it does not implement the bonus flags.
 
 ---
 
-## Descripción general de la librería y descripción de funciones
+## General description of the library and function descriptions
 
-### 1. Núcleo del programa
+### 1. Program core
 
-* `ft_printf` – Recorre la cadena de formato carácter a carácter, inicializa y cierra la `va_list` y delega cada conversión en `print_evaluator`. Acumula y devuelve el número total de caracteres escritos. Si el formato es `NULL`, devuelve `-1`.
-* `print_evaluator` – Identifica el especificador de conversión y llama a la función auxiliar correspondiente, extrayendo el argumento con `va_arg`.
-* `ft_printf.h` – Header único de la librería: declara los prototipos y las cabeceras necesarias (`unistd.h`, `stdlib.h`, `stdarg.h`).
+* `ft_printf` – Iterates through the format string character by character, initializes and closes the `va_list`, and delegates each conversion to `print_evaluator`. It accumulates and returns the total number of characters written. If the format is `NULL`, it returns `-1`.
+* `print_evaluator` – Identifies the conversion specifier and calls the corresponding helper function, extracting the argument with `va_arg`.
+* `ft_printf.h` – Single header of the library: declares the prototypes and the required headers (`unistd.h`, `stdlib.h`, `stdarg.h`).
 
-### 2. Funciones auxiliares
+### 2. Helper functions
 
-* `print_char` – Escribe un solo carácter en el descriptor de salida.
-* `print_str` – Recorre e imprime una cadena, con gestión de `NULL` y devolución del número de caracteres.
-* `print_digit` – Convierte y escribe un número en la base indicada (10 o 16), en minúsculas o mayúsculas, mediante recursión. Gestiona el signo negativo de `%d`/`%i`.
-* `print_mem_dir` – Imprime una dirección de memoria con el prefijo `0x`, o `(nil)` si el puntero es nulo.
+* `print_char` – Writes a single character to the output descriptor.
+* `print_str` – Iterates through and prints a string, handling `NULL` and returning the number of characters.
+* `print_digit` – Converts and writes a number in the specified base (10 or 16), in lowercase or uppercase, through recursion. It handles the negative sign of `%d`/`%i`.
+* `print_mem_dir` – Prints a memory address with the `0x` prefix, or `(nil)` if the pointer is null.
 
-### 3. Estructura del proyecto
+### 3. Project structure
 
-| Archivo | Contenido |
+| File | Contents |
 | :--- | :--- |
-| `ft_printf.c` | Bucle principal y gestión de la `va_list`. |
-| `print_evaluator.c` | Dispatcher de especificadores. |
-| `print_char.c` | Conversión `%c`. |
-| `print_str.c` | Conversión `%s`. |
-| `print_digit.c` | Conversiones `%d`, `%i`, `%u`, `%x` y `%X`. |
-| `print_mem_dir.c` | Conversión `%p`. |
-| `ft_printf.h` | Prototipos y cabeceras. |
-| `Makefile` | Reglas de compilación y creación de la librería. |
+| `ft_printf.c` | Main loop and `va_list` management. |
+| `print_evaluator.c` | Specifier dispatcher. |
+| `print_char.c` | `%c` conversion. |
+| `print_str.c` | `%s` conversion. |
+| `print_digit.c` | `%d`, `%i`, `%u`, `%x`, and `%X` conversions. |
+| `print_mem_dir.c` | `%p` conversion. |
+| `ft_printf.h` | Prototypes and headers. |
+| `Makefile` | Compilation rules and library creation. |
 
 ---
 
-## Instrucciones
+## Instructions
 
-### Compilación
+### Compilation
 
-El proyecto utiliza un `Makefile` que compila todos los archivos fuente con `cc` y las flags `-Wall -Wextra -Werror`, y genera la librería estática `libftprintf.a` mediante `ar`.
+The project uses a `Makefile` that compiles all source files with `cc` and the `-Wall -Wextra -Werror` flags, and generates the static library `libftprintf.a` using `ar`.
 
-1. **Compilar la librería:**
+1. **Compile the library:**
 
    ~~~bash
    make
    ~~~
 
-   Compila todos los archivos `.c` listados en `SRC` y genera la librería estática `libftprintf.a`.
+   Compiles all `.c` files listed in `SRC` and generates the static library `libftprintf.a`.
 
-2. **Limpiar los archivos objeto:**
+2. **Clean the object files:**
 
    ~~~bash
    make clean
    ~~~
 
-   Elimina todos los archivos objeto (`.o`) generados durante la compilación.
+   Removes all object files (`.o`) generated during compilation.
 
-3. **Limpiar los archivos objeto y `libftprintf.a`:**
+3. **Clean the object files and `libftprintf.a`:**
 
    ~~~bash
    make fclean
    ~~~
 
-   Elimina tanto los archivos objeto como la librería estática.
+   Removes both the object files and the static library.
 
-4. **Recompilar todo desde cero:**
+4. **Recompile everything from scratch:**
 
    ~~~bash
    make re
    ~~~
 
-   Ejecuta `fclean` y luego `all`, recompilando el proyecto completo.
+   Runs `fclean` and then `all`, recompiling the entire project.
 
-### Integración y ejecución
+### Integration and execution
 
-Para usar `libftprintf.a`:
+To use `libftprintf.a`:
 
-1. Incluye el header en tu archivo `*.c`:
+1. Include the header in your `*.c` file:
 
    ~~~c
    #include "ft_printf.h"
    ~~~
 
-2. Compila enlazando la librería:
+2. Compile by linking the library:
 
    ~~~bash
    cc -Wall -Wextra -Werror main.c libftprintf.a
    ~~~
 
-   - `-Wall` para activar los warnings importantes.
-   - `-Wextra` activa warnings adicionales.
-   - `-Werror` convierte los warnings en errores.
+   - `-Wall` enables the important warnings.
+   - `-Wextra` enables additional warnings.
+   - `-Werror` turns warnings into errors.
 
-   También puedes enlazarla por nombre, indicando al enlazador dónde buscar:
+   You can also link it by name, telling the linker where to search:
 
    ~~~bash
    cc -Wall -Wextra -Werror main.c -L. -lftprintf
    ~~~
 
-   - `-L.` indica al enlazador que busque librerías en el directorio actual.
-   - `-lftprintf` indica que enlace con `libftprintf.a` (el prefijo `lib` y la extensión `.a` se omiten).
+   - `-L.` tells the linker to search for libraries in the current directory.
+   - `-lftprintf` tells it to link against `libftprintf.a` (the `lib` prefix and the `.a` extension are omitted).
 
-   En ambos casos, la librería debe colocarse **después** de los archivos que la usan.
+   In both cases, the library must be placed **after** the files that use it.
 
-### Ejemplo de uso
+### Usage example
 
 ~~~c
 #include "ft_printf.h"
@@ -139,47 +139,47 @@ int	main(void)
 	int	n;
 
 	n = 42;
-	ft_printf("Hola %s, tienes %d años\n", "Pepito", 42);
+	ft_printf("Hello %s, you are %d years old\n", "Pepito", 42);
 	ft_printf("hex: %x | HEX: %X | ptr: %p | %%\n",
 		255, 255, (void *)&n);
 	return (0);
 }
 ~~~
 
-Salida:
+Output:
 
 ~~~text
-Hola Pepito, tienes 42 años
+Hello Pepito, you are 42 years old
 hex: ff | HEX: FF | ptr: 0x... | %
 ~~~
 
 ---
 
-## Comportamiento y notas
+## Behavior and notes
 
-* `ft_printf` devuelve el número total de bytes escritos, igual que `printf`.
-* `%s` con `NULL` imprime `(null)` y `%p` con `NULL` imprime `(nil)` (convención de glibc en Linux).
-* `%d` con `INT_MIN` y `%u`/`%x`/`%X` con `UINT_MAX` se gestionan sin desbordamiento en plataformas de 64 bits.
-* `%c` con el carácter `\0` escribe el byte nulo y lo cuenta como un carácter.
-* La función `write` es la única función de salida utilizada.
+* `ft_printf` returns the total number of bytes written, just like `printf`.
+* `%s` with `NULL` prints `(null)` and `%p` with `NULL` prints `(nil)` (glibc convention on Linux).
+* `%d` with `INT_MIN` and `%u`/`%x`/`%X` with `UINT_MAX` are handled without overflow on 64-bit platforms.
+* `%c` with the `\0` character writes the null byte and counts it as a character.
+* The `write` function is the only output function used.
 
 ---
 
-## Recursos
+## Resources
 
-### Referencias y documentación
+### References and documentation
 
-* **PDF del subject de 42** – Contiene las reglas específicas del proyecto, los prototipos exactos, los requisitos de normativa y los criterios de evaluación.
-* **https://es.cppreference.com/c/variadic** – Utilizado para repasar conceptos de funciones t argumentos variadicos, me ayudo muhco a comprender a visualizar lo que se me pedia para este proyecto
-* **https://es.cppreference.com/c/io/fprintf** – Utilizado para repasar la funcion printf e intentar mimetizarla en todo lo que se me pedia de la manera mas fidedigna.
-* **El man (manual) de Linux** – Consulta de comandos del sistema y de los prototipos y comportamientos de las funciones estándar de `libc` (por ejemplo, `man write`, `man printf`), y además tambien consultar el man de `va_start`, `va_arg`, `va_list`, `va_end`.
+* **42 subject PDF** – Contains the specific project rules, the exact prototypes, the norm requirements, and the evaluation criteria.
+* **https://es.cppreference.com/c/variadic** – Used to review concepts about variadic functions and arguments; it helped me a lot to understand and visualize what was required for this project.
+* **https://es.cppreference.com/c/io/fprintf** – Used to review the printf function and try to mimic it in everything required as faithfully as possible.
+* **The Linux man (manual)** – Consultation of system commands and the prototypes and behaviors of standard `libc` functions (for example, `man write`, `man printf`), and also consultation of the man pages for `va_start`, `va_arg`, `va_list`, `va_end`.
 
-### Herramientas de prueba
+### Testing tools
 
-* **Tests propios** – Mis tests, aunque sencillos, fueron los que me ayudaron a plantearme la mayoría de problemas y/o a como abordar mis funciones.
-* **https://pythontutor.com/c.html** – Herramienta de visualización paso a paso de código C. Se utilizó para identificar fallos, entender el flujo de ejecución y depurar el manejo de punteros y la recursión.
-* **[francinette-image](https://github.com/WaRtr0/francinette-image)** –  Se ha utilizado esta herramienta de la comunidad de 42 para testear mi proyecto
+* **My own tests** – My tests, although simple, were what helped me pose most of the problems and/or figure out how to approach my functions.
+* **https://pythontutor.com/c.html** – Step-by-step visualization tool for C code. It was used to identify bugs, understand the execution flow, and debug pointer handling and recursion.
+* **[francinette-image](https://github.com/WaRtr0/francinette-image)** – This tool from the 42 community was used to test my project.
 
-### Sobre el uso de IA
+### About the use of AI
 
-* La IA se utilizó para crear, formatear y estructurar este archivo `README.md` de acuerdo con los requisitos indicados en el subject de este proyecto de 42.
+* AI was used to create, format, and structure this `README.md` file in accordance with the requirements stated in the subject of this 42 project.
